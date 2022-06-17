@@ -5,7 +5,10 @@
  */
 package carlosbarahona_ianbeltrand_lab9p2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
+import javax.swing.Timer;
 
 /**
  *
@@ -195,13 +198,18 @@ public class Main extends javax.swing.JFrame {
         jDialog3.setMaximumSize(new java.awt.Dimension(400, 520));
         jDialog3.setMinimumSize(new java.awt.Dimension(400, 520));
 
-        jLabel9.setText("¿En que parte de la Unidad dese guardar?");
+        jLabel9.setText("¿En que parte de la Unidad desea guardar?");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Mi Unidad");
         jTree2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane2.setViewportView(jTree2);
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
@@ -347,6 +355,11 @@ public class Main extends javax.swing.JFrame {
         jDialog3.setTitle("¿Donde desea guardar?");
         jDialog3.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
