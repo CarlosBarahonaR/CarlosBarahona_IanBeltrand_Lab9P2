@@ -610,6 +610,7 @@ public class Main extends javax.swing.JFrame implements Runnable {
             if (SelectedNode.getUserObject() instanceof Carpetas) {
 
                 carpeta = (Carpetas) SelectedNode.getUserObject();
+                System.out.println(SelectedNode.getUserObject());
 
                 jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
 
@@ -627,15 +628,14 @@ public class Main extends javax.swing.JFrame implements Runnable {
             }
 
             try {
-
-                for (int i = 0; i <= totalDescarga; i++) {
+                for (int i = 0; i <= 100; i++) {
                     int x = 0;
 
                     jProgressBar3.setValue(jProgressBar3.getValue() + 1);
                     if (jProgressBar3.getValue() == 100) {
                         jProgressBar3.setValue(0);
                     }
-                    Thread.sleep(totalDescarga);
+                    Thread.sleep(100);
                 }
             } catch (Exception e) {
                 System.out.println(e);
