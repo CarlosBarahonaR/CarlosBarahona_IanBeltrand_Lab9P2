@@ -8,6 +8,7 @@ package carlosbarahona_ianbeltrand_lab9p2;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import javax.swing.DefaultListModel;
@@ -19,7 +20,7 @@ import javax.swing.tree.DefaultTreeModel;
  *
  * @author Admin
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Main
@@ -60,6 +61,10 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TreeSeleccion = new javax.swing.JTree();
         GuardarCarpetaButton = new javax.swing.JButton();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         MiUnidadTree = new javax.swing.JTree();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -116,7 +121,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(CrearCarpetaDialogLayout.createSequentialGroup()
                         .addComponent(GuardarUnidadButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SeleccionarCarpetaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 166, Short.MAX_VALUE))
+                        .addComponent(SeleccionarCarpetaDialog, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearCarpetaDialogLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -139,7 +144,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        CrearArchivoDialog.setMaximumSize(new java.awt.Dimension(450, 280));
         CrearArchivoDialog.setMinimumSize(new java.awt.Dimension(450, 280));
 
         jLabel5.setText("Creacion de archivos");
@@ -209,7 +213,6 @@ public class Main extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        SeleccionCarpetaDialog.setMaximumSize(new java.awt.Dimension(400, 520));
         SeleccionCarpetaDialog.setMinimumSize(new java.awt.Dimension(400, 520));
 
         jLabel9.setText("¿En que parte de la Unidad dese guardar?");
@@ -259,10 +262,29 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenuItem7.setText("Descargar");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem7);
+
+        jMenuItem6.setText("Eliminar");
+        jPopupMenu1.add(jMenuItem6);
+
+        jMenuItem8.setText("Destacar");
+        jPopupMenu1.add(jMenuItem8);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("MI UNIDAD");
         MiUnidadTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        MiUnidadTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MiUnidadTreeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(MiUnidadTree);
 
         jLabel1.setText("Descarga individual");
@@ -346,39 +368,39 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void ActualizarTreeMiUnidad(){
-        DefaultTreeModel model = (DefaultTreeModel)MiUnidadTree.getModel();
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+    public void ActualizarTreeMiUnidad() {
+        DefaultTreeModel model = (DefaultTreeModel) MiUnidadTree.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
         root.removeAllChildren();
-        
+
         for (Carpetas carpeta : admi.getMiUnidad().getCarpetas()) {
             DefaultMutableTreeNode nodeCarpeta = new DefaultMutableTreeNode(carpeta);
-            
+
             ActualizarTreeRecursiva(carpeta, nodeCarpeta);
-            
+
             root.add(nodeCarpeta);
         }
-        
+
         model.reload();
         TreeSeleccion.setModel(model);
     }
-    
-    public void ActualizarTreeRecursiva(Carpetas carpetaA, DefaultMutableTreeNode nodeA){
+
+    public void ActualizarTreeRecursiva(Carpetas carpetaA, DefaultMutableTreeNode nodeA) {
         for (Carpetas carpeta : carpetaA.getCarpetas()) {
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(carpeta);
-            
+
             ActualizarTreeRecursiva(carpeta, newNode);
             nodeA.add(newNode);
-            
+
         }
-        
+
         for (Archivos archivo : carpetaA.getArchivos()) {
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(archivo);
-            
+
             nodeA.add(newNode);
         }
     }
-    
+
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
 
@@ -408,32 +430,32 @@ public class Main extends javax.swing.JFrame {
         SeleccionCarpetaDialog.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public String GenerarLinkCarpeta(Carpetas padre){
+    public String GenerarLinkCarpeta(Carpetas padre) {
         String link = "dive.google.com";
-        
+
         link = link + admi.GenerarDireccionCarpeta(padre.getNombre(), padre, link);
-        
+
         link = link + "/";
-        
+
         for (int i = 0; i < 5; i++) {
             Random r = new Random();
 
             char c = (char) (r.nextInt(26) + 'a');
-            
+
             link = link + c;
         }
-        
+
         return link;
     }
-    
+
     private void GuardarUnidadButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarUnidadButtonMouseClicked
         // TODO add your handling code here:
         String name = NombreCarpetaCrear.getText();
-        
+
         admi.getMiUnidad().getCarpetas().add(new Carpetas(name, GenerarLinkCarpeta(admi.getMiUnidad())));
-        
+
         AgregarBaseDatos(new Carpetas(name, GenerarLinkCarpeta(admi.getMiUnidad())));
-        
+
         ActualizarTreeMiUnidad();
     }//GEN-LAST:event_GuardarUnidadButtonMouseClicked
 
@@ -442,40 +464,40 @@ public class Main extends javax.swing.JFrame {
         SeleccionCarpetaDialog.setLocationRelativeTo(null);
         SeleccionCarpetaDialog.setTitle("¿Donde desea guardar?");
         SeleccionCarpetaDialog.setVisible(true);
-        
+
         ActualizarTreeMiUnidad();
     }//GEN-LAST:event_SeleccionarCarpetaDialogMouseClicked
 
     private void GuardarCarpetaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarCarpetaButtonMouseClicked
         // TODO add your handling code here:
-        
-        if(SelectedNode.getUserObject() instanceof Carpetas){
+
+        if (SelectedNode.getUserObject() instanceof Carpetas) {
             Carpetas carpetaSeleccionada = (Carpetas) SelectedNode.getUserObject();
-            
+
             String name = NombreCarpetaCrear.getText();
-            
+
             carpetaSeleccionada.getCarpetas().add(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
-            
+
             AgregarBaseDatos(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
-            
+
             ActualizarTreeMiUnidad();
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(SeleccionCarpetaDialog, "Lo seleccionado no es una carpeta");
         }
     }//GEN-LAST:event_GuardarCarpetaButtonMouseClicked
 
-    public void AgregarBaseDatos(Carpetas Carpeta){
+    public void AgregarBaseDatos(Carpetas Carpeta) {
         Dba db = new Dba("./GoogleUndead.mdb");
         db.conectar();
         try {
             int c = 0;
             String n = Carpeta.getNombre();
             Date date = new Date();
-            
+
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             String sDate = dateFormat.format(date);
-            
+
             db.query.execute("INSERT INTO Carpetas"
                     + " VALUES ('" + n + "', '" + c + "', '" + sDate + "')");
             db.commit();
@@ -492,6 +514,72 @@ public class Main extends javax.swing.JFrame {
         Object Posicion = TreeSeleccion.getSelectionPath().getLastPathComponent();
         SelectedNode = (DefaultMutableTreeNode) Posicion;
     }//GEN-LAST:event_TreeSeleccionMouseClicked
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        hilo = new Thread((Runnable) this);
+        hilo.start();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void MiUnidadTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MiUnidadTreeMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+
+            //seleccionar un nodo con click derecho
+            int row = MiUnidadTree.getClosestRowForLocation(evt.getX(), evt.getY());
+
+            MiUnidadTree.setSelectionRow(row);
+
+            Object Posicion = MiUnidadTree.getSelectionPath().getLastPathComponent();
+
+            SelectedNode = (DefaultMutableTreeNode) Posicion;
+
+            if (SelectedNode.getUserObject() instanceof Archivos) {
+
+                archivo = (Archivos) SelectedNode.getUserObject();
+
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+
+            }
+
+            if (SelectedNode.getUserObject() instanceof Carpetas) {
+
+                carpeta = (Carpetas) SelectedNode.getUserObject();
+
+                jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+
+            }
+
+        }
+    }//GEN-LAST:event_MiUnidadTreeMouseClicked
+
+    public void run() {
+        if (carpeta != null) {
+            int totalDescarga = 0;
+            int descargaIndividual = 0;
+            for (int i = 0; i < carpeta.getArchivos().size(); i++) {
+                totalDescarga += carpeta.getArchivos().get(i).getTamaño();
+            }
+            
+           
+            try {
+               
+                for (int i = 0; i <= totalDescarga; i++) {
+                    int x=0;
+                    
+                    jProgressBar3.setValue(jProgressBar3.getValue() + 1);
+                    if (jProgressBar3.getValue() == 100) {
+                        jProgressBar3.setValue(0);
+                    }
+                    Thread.sleep(totalDescarga);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else if (archivo != null) {
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -556,6 +644,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JProgressBar jProgressBar3;
@@ -565,6 +657,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
-Admi admi = new Admi();
-DefaultMutableTreeNode SelectedNode = null;
+    Admi admi = new Admi();
+    Carpetas carpeta = null;
+    Archivos archivo = null;
+    DefaultMutableTreeNode SelectedNode = null;
+    Thread hilo;
 }
