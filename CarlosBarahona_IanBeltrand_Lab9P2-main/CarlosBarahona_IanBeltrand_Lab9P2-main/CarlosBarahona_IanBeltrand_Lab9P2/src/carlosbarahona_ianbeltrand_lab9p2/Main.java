@@ -560,13 +560,12 @@ public class Main extends javax.swing.JFrame implements Runnable {
             for (int i = 0; i < carpeta.getArchivos().size(); i++) {
                 totalDescarga += carpeta.getArchivos().get(i).getTamaño();
             }
-            
-           
+
             try {
-               
+
                 for (int i = 0; i <= totalDescarga; i++) {
-                    int x=0;
-                    
+                    int x = 0;
+
                     jProgressBar3.setValue(jProgressBar3.getValue() + 1);
                     if (jProgressBar3.getValue() == 100) {
                         jProgressBar3.setValue(0);
@@ -577,7 +576,24 @@ public class Main extends javax.swing.JFrame implements Runnable {
                 System.out.println(e);
             }
         } else if (archivo != null) {
+            int totalDescarga = 0;
+    
+                totalDescarga = archivo.getTamaño();
+        
+            try {
 
+                for (int i = 0; i <= totalDescarga; i++) {
+                    int x = 0;
+
+                    jProgressBar3.setValue(jProgressBar3.getValue() + 1);
+                    if (jProgressBar3.getValue() == 100) {
+                        jProgressBar3.setValue(0);
+                    }
+                    Thread.sleep(totalDescarga);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
