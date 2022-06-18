@@ -52,10 +52,10 @@ public class Main extends javax.swing.JFrame implements Runnable {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        GuardarArchivoCrear = new javax.swing.JButton();
+        SizeArchivoCrear = new javax.swing.JSpinner();
+        NombreArchivoCrear = new javax.swing.JTextField();
+        ExtensionComboBox = new javax.swing.JComboBox<>();
         SeleccionCarpetaDialog = new javax.swing.JDialog();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -144,6 +144,7 @@ public class Main extends javax.swing.JFrame implements Runnable {
                 .addContainerGap())
         );
 
+        CrearArchivoDialog.setMaximumSize(new java.awt.Dimension(450, 280));
         CrearArchivoDialog.setMinimumSize(new java.awt.Dimension(450, 280));
 
         jLabel5.setText("Creacion de archivos");
@@ -154,12 +155,14 @@ public class Main extends javax.swing.JFrame implements Runnable {
 
         jLabel8.setText("Tamaño");
 
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        GuardarArchivoCrear.setText("Guardar");
+        GuardarArchivoCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                GuardarArchivoCrearActionPerformed(evt);
             }
         });
+
+        ExtensionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".docx", ".mp4", ".txt", ".png", ".jpg" }));
 
         javax.swing.GroupLayout CrearArchivoDialogLayout = new javax.swing.GroupLayout(CrearArchivoDialog.getContentPane());
         CrearArchivoDialog.getContentPane().setLayout(CrearArchivoDialogLayout);
@@ -177,18 +180,18 @@ public class Main extends javax.swing.JFrame implements Runnable {
                             .addGroup(CrearArchivoDialogLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(26, 26, 26)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(SizeArchivoCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(CrearArchivoDialogLayout.createSequentialGroup()
                                 .addGroup(CrearArchivoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addGroup(CrearArchivoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)))))
+                                    .addComponent(NombreArchivoCrear)
+                                    .addComponent(ExtensionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(CrearArchivoDialogLayout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(jButton2)))
+                        .addComponent(GuardarArchivoCrear)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         CrearArchivoDialogLayout.setVerticalGroup(
@@ -199,20 +202,21 @@ public class Main extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CrearArchivoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreArchivoCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(CrearArchivoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ExtensionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(CrearArchivoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SizeArchivoCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(GuardarArchivoCrear)
                 .addGap(19, 19, 19))
         );
 
+        SeleccionCarpetaDialog.setMaximumSize(new java.awt.Dimension(400, 520));
         SeleccionCarpetaDialog.setMinimumSize(new java.awt.Dimension(400, 520));
 
         jLabel9.setText("¿En que parte de la Unidad dese guardar?");
@@ -423,12 +427,12 @@ public class Main extends javax.swing.JFrame implements Runnable {
         SeleccionCarpetaDialog.setVisible(true);
     }//GEN-LAST:event_SeleccionarCarpetaDialogActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void GuardarArchivoCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarArchivoCrearActionPerformed
         // TODO add your handling code here:
         SeleccionCarpetaDialog.setLocationRelativeTo(null);
         SeleccionCarpetaDialog.setTitle("¿Donde desea guardar?");
         SeleccionCarpetaDialog.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_GuardarArchivoCrearActionPerformed
 
     public String GenerarLinkCarpeta(Carpetas padre) {
         String link = "dive.google.com";
@@ -471,20 +475,79 @@ public class Main extends javax.swing.JFrame implements Runnable {
     private void GuardarCarpetaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarCarpetaButtonMouseClicked
         // TODO add your handling code here:
 
-        if (SelectedNode.getUserObject() instanceof Carpetas) {
-            Carpetas carpetaSeleccionada = (Carpetas) SelectedNode.getUserObject();
+        // TODO add your handling code here:
 
-            String name = NombreCarpetaCrear.getText();
+       if(binario == 0){
 
-            carpetaSeleccionada.getCarpetas().add(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
+           if(SelectedNode.getUserObject() instanceof Carpetas){
 
-            AgregarBaseDatos(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
+               Carpetas carpetaSeleccionada = (Carpetas) SelectedNode.getUserObject();
 
-            ActualizarTreeMiUnidad();
+ 
 
-        } else {
-            JOptionPane.showMessageDialog(SeleccionCarpetaDialog, "Lo seleccionado no es una carpeta");
-        }
+               String name = NombreCarpetaCrear.getText();
+
+ 
+
+               carpetaSeleccionada.getCarpetas().add(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
+
+ 
+
+               AgregarBaseDatos(new Carpetas(name, GenerarLinkCarpeta(carpetaSeleccionada)));
+
+ 
+
+               ActualizarTreeMiUnidad();
+
+ 
+
+           }else{
+
+               JOptionPane.showMessageDialog(SeleccionCarpetaDialog, "Lo seleccionado no es una carpeta");
+
+           }
+
+       }else{
+
+           if(binario == 1){
+
+               if(SelectedNode.getUserObject() instanceof Carpetas){
+
+                   Carpetas carpetaSeleccionada = (Carpetas) SelectedNode.getUserObject();
+
+ 
+
+                   String name = NombreArchivoCrear.getText();
+
+                   String extension = ExtensionComboBox.getSelectedItem().toString();
+
+                   String link = "";
+
+                   int size = (Integer) SizeArchivoCrear.getValue();
+
+ 
+
+                   carpetaSeleccionada.getArchivos().add(new Archivos(name, extension, link, size));
+
+ 
+
+                   AgregarBaseDatosA(new Archivos(name, extension, link, size));
+
+                   
+
+                   ActualizarTreeMiUnidad();
+
+ 
+
+               }else{
+
+                   JOptionPane.showMessageDialog(SeleccionCarpetaDialog, "Lo seleccionado no es una carpeta");
+
+               }
+
+           }
+
+       }
     }//GEN-LAST:event_GuardarCarpetaButtonMouseClicked
 
     public void AgregarBaseDatos(Carpetas Carpeta) {
@@ -507,6 +570,8 @@ public class Main extends javax.swing.JFrame implements Runnable {
         db.desconectar();
 
     }
+    
+    
     private void TreeSeleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeSeleccionMouseClicked
         // TODO add your handling code here:
         int row = TreeSeleccion.getClosestRowForLocation(evt.getX(), evt.getY());
@@ -596,6 +661,46 @@ public class Main extends javax.swing.JFrame implements Runnable {
             }
         }
     }
+    
+    public void AgregarBaseDatosA(Archivos archivo){
+
+       Dba db = new Dba("./GoogleUndead.mdb");
+
+       db.conectar();
+
+       try {
+
+           int size = archivo.getTamaño();
+
+           String n = archivo.getNombre();
+
+           Date date = new Date();
+
+           String carpeta = "Yes";
+
+           
+
+           DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh🇲🇲ss");
+
+           String sDate = dateFormat.format(date);
+
+           
+
+           db.query.execute("INSERT INTO Archivos"
+
+                   + " VALUES ('" + n + "', '" + size + "', '" + sDate + "', '" + carpeta + "')");
+
+           db.commit();
+
+       } catch (SQLException ex) {
+
+           ex.printStackTrace();
+
+       }
+
+       db.desconectar();
+
+   }
 
     /**
      * @param args the command line arguments
@@ -635,14 +740,17 @@ public class Main extends javax.swing.JFrame implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog CrearArchivoDialog;
     private javax.swing.JDialog CrearCarpetaDialog;
+    private javax.swing.JComboBox<String> ExtensionComboBox;
+    private javax.swing.JButton GuardarArchivoCrear;
     private javax.swing.JButton GuardarCarpetaButton;
     private javax.swing.JButton GuardarUnidadButton;
     private javax.swing.JTree MiUnidadTree;
+    private javax.swing.JTextField NombreArchivoCrear;
     private javax.swing.JTextField NombreCarpetaCrear;
     private javax.swing.JDialog SeleccionCarpetaDialog;
     private javax.swing.JButton SeleccionarCarpetaDialog;
+    private javax.swing.JSpinner SizeArchivoCrear;
     private javax.swing.JTree TreeSeleccion;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -669,13 +777,11 @@ public class Main extends javax.swing.JFrame implements Runnable {
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
     Admi admi = new Admi();
     Carpetas carpeta = null;
     Archivos archivo = null;
     DefaultMutableTreeNode SelectedNode = null;
     Thread hilo;
+    int binario=0;
 }
