@@ -630,10 +630,11 @@ public class Main extends javax.swing.JFrame implements Runnable {
             try {
                 for (int i = 0; i <= 100; i++) {
                     int x = 0;
-
+                    jProgressBar2.setValue(jProgressBar2.getValue() + 1);
                     jProgressBar3.setValue(jProgressBar3.getValue() + 1);
-                    if (jProgressBar3.getValue() == 100) {
+                    if (jProgressBar3.getValue() == 100&&jProgressBar2.getValue() == 100) {
                         jProgressBar3.setValue(0);
+                        jProgressBar2.setValue(0);
                     }
                     Thread.sleep(100);
                 }
